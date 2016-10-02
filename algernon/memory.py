@@ -33,8 +33,8 @@ class Memory:
         :param done: indicates the episode is finished.
         :return: void
         '''
-        assert state.shape == self.observation_shape
-        assert state_prime.shape == self.observation_shape
+        # assert state.shape == self.observation_shape
+        # assert state_prime.shape == self.observation_shape
         assert 0 <= action < self.action_dims
         self.memories.append((state, action, reward, state_prime, done))
 

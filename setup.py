@@ -8,8 +8,7 @@ import re
 import sys
 
 from setuptools.command.test import test as TestCommand
-from tests.test_command import PyTest
-
+from tests.pytest_helper import PyTest
 
 
 def read(*names, **kwargs):
@@ -51,6 +50,6 @@ setup(
     keywords='deeplearning reinforcement_learning',
     packages=find_packages(exclude=['tests*']),
     install_requires=['numpy', 'keras'],
-    test_requires=['pytest'],
+    tests_require=['pytest', 'pytest-cov'],
     cmdclass={'test': PyTest}
  )
