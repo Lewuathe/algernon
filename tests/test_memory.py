@@ -14,6 +14,9 @@ class MockModel:
     def predict(self, X):
         return np.dot(X, self.w.T)
 
+    def predict_proba(self, X):
+        return self.predict(X)
+
 class TestMemory:
     TEST_OBSERVATION_SHAPE = (4, 2)
     TEST_ACTION_DIMS = 3

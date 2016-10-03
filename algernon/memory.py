@@ -35,10 +35,10 @@ class Memory:
         '''
         # assert state.shape == self.observation_shape
         # assert state_prime.shape == self.observation_shape
-        assert 0 <= action < self.action_dims
+        # assert 0 <= action < self.action_dims
         self.memories.append((state, action, reward, state_prime, done))
 
-    def get_batch(self, model, batch_size):
+    def get_batch(self, agent, batch_size):
         '''
         Construct training batch from sampling memory data
         :param model: The target model which should be trained
@@ -59,17 +59,17 @@ class Memory:
         train_idx = np.random.randint(0, memory_len, size=batch_size)
 
         for i, idx in enumerate(train_idx):
-            s, a, r, s_prime, done = self.memories[idx]
+            s, ai, r, s_prime, done = self.memories[idx]
 
             X[i, :] = s
-            y[i, :] = model.predict(np.expand_dims(s, 0))[0]
+            y[i, :] = agent.predict_proba(np.expand_dims(s, 0))[0]
 
-            max_q = np.max(model.predict(np.expand_dims(s_prime, 0))[0])
+            max_q = np.max(agent.predict_proba(np.expand_dims(s_prime, 0))[0])
 
             if done:
-                y[i, a] = r
+                y[i, ai] = r
             else:
-                y[i, a] = r + self.gamma * max_q
+                y[i, ai] = r + self.gamma * max_q
 
         return X, y
 
