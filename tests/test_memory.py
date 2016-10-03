@@ -51,18 +51,6 @@ class TestMemory:
 
         assert len(m.memories) == 1
 
-    def test_invalid_append(self):
-        m = Memory(TestMemory.TEST_OBSERVATION_SHAPE,
-                   TestMemory.TEST_ACTION_DIMS,
-                   TestMemory.TEST_GAMMA,
-                   TestMemory.TEST_MAX_MEMORY)
-        s = np.random.random(size=TestMemory.TEST_OBSERVATION_SHAPE)
-        s_prime = np.random.random(size=TestMemory.TEST_OBSERVATION_SHAPE)
-
-        with pytest.raises(AssertionError):
-            # Action dimension shuld be 0~2
-            m.append(s, 10, 0.3, s_prime, False)
-
     def test_get_batch(self):
         m = Memory(TestMemory.TEST_OBSERVATION_SHAPE,
                    TestMemory.TEST_ACTION_DIMS,
