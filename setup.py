@@ -50,6 +50,6 @@ setup(
     keywords='deeplearning reinforcement_learning',
     packages=find_packages(exclude=['tests*']),
     install_requires=['numpy', 'keras'],
-    tests_require=['pytest', 'pytest-cov', 'tensorflow'],
+    tests_require=['pytest', 'pytest-cov'],
     cmdclass={'test': PyTest}
  )
